@@ -23,14 +23,25 @@ class _MainAppState extends State<MainApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        brightness: Brightness.light,
+        primaryColor: const Color(0xFFFFC34E),
+      ),
       home: Scaffold(
-        bottomNavigationBar: BottomNavigationBar(
-          items: main_navigation.pages
-              .map((page) => BottomNavigationBarItem(
-                  icon: page['icon'], label: page['label']))
-              .toList(),
-          currentIndex: _selectedPage,
-          onTap: setPage,
+        bottomNavigationBar: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 24),
+          child: BottomNavigationBar(
+            elevation: 0,
+            selectedItemColor: const Color(0xFFFFC34E),
+            unselectedItemColor: const Color(0xFFADADAD),
+            iconSize: 30,
+            items: main_navigation.pages
+                .map((page) => BottomNavigationBarItem(
+                    icon: page['icon'], label: page['label']))
+                .toList(),
+            currentIndex: _selectedPage,
+            onTap: setPage,
+          ),
         ),
         body: main_navigation.pages[_selectedPage]['widget'],
       ),
