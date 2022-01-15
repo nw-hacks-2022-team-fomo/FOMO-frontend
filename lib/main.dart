@@ -32,6 +32,7 @@ class _MainAppState extends State<MainApp> {
           padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 24),
           child: BottomNavigationBar(
             elevation: 0,
+            // TODO: Extract nav widget.
             selectedItemColor: const Color(0xFFFFC34E),
             unselectedItemColor: const Color(0xFFADADAD),
             iconSize: 30,
