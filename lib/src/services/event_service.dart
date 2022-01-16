@@ -1,4 +1,7 @@
-//import 'package:http/http.dart' as http;
+import 'dart:convert';
+
+import 'package:flutter/cupertino.dart';
+import 'package:http/http.dart' as http;
 
 class Event {
   final String id;
@@ -10,9 +13,17 @@ class Event {
   final int numShares;
   final String shareLink;
   final List<String> assets;
+  final double latitude;
+  final double longitude;
+  final int participants;
+  final int priceEstimate;
 
   Event(
-      {required this.id,
+      {required this.priceEstimate,
+      required this.participants,
+      required this.latitude,
+      required this.longitude,
+      required this.id,
       required this.title,
       required this.user,
       required this.description,
@@ -23,68 +34,39 @@ class Event {
       required this.assets});
 
   factory Event.fromJson(Map<String, dynamic> json) {
+    List<dynamic> assetsList = json['assets'];
+    List<dynamic> tagsList = json['tags'];
+
     return Event(
-        id: json['id'],
-        title: json['title'],
-        user: json['user'],
+        priceEstimate: json['price_estimate'],
+        participants: json['participants'],
+        latitude: json['latitude'],
+        longitude: json['longitude'],
+        id: json['id'].toString(),
+        title: json['event_name'],
+        user: "dsasd",
         description: json['description'],
-        tags: json['tags'],
-        numLikes: json['numLikes'],
-        numShares: json['numShares'],
-        shareLink: json['shareLink'],
-        assets: json['assets']);
+        numLikes: json['likes'],
+        numShares: json['shares'],
+        shareLink: json['share_link'],
+        tags: tagsList.map((tag) => getAttribute("tag", tag)).toList(),
+        assets:
+            assetsList.map((asset) => getAttribute("name", asset)).toList());
   }
 }
 
+String getAttribute(String attr, dynamic json) {
+  Map<String, dynamic> jsonObj = json;
+  debugPrint(jsonObj[attr]);
+  return jsonObj[attr];
+}
+
 // TODO: Refactor when endpoint is done
-Future<List<Event>> getEvents() {
-  return Future.value([
-    Event(
-      id: '0',
-      title: 'Soju Sunday',
-      user: 'random uuid 123',
-      description:
-          "Vancouver's most popular K-pop night-club is back and better than before! Celebrate our 4th anniversary with us this Sunday, get your earlybird tickets today!",
-      tags: ['Drinks', 'Music', 'Party', 'Dance'],
-      numLikes: 25,
-      numShares: 10,
-      shareLink: 'facebook.com',
-      assets: [
-        'https://picsum.photos/800/1600',
-        'https://picsum.photos/200/300'
-      ],
-    ),
-    Event(
-      id: '1',
-      title: 'Sake Satuday',
-      user: 'random uuid 321',
-      description:
-          "Vancouver's most popular K-pop night-club is back and better than before! Celebrate our 4th anniversary with us this Sunday, get your earlybird tickets today!",
-      tags: ['Drinks', 'Music', 'Party', 'Dance'],
-      numLikes: 179,
-      numShares: 17,
-      shareLink: 'facebook.com',
-      assets: [
-        'https://picsum.photos/200/300',
-        'https://picsum.photos/200/300',
-        'https://picsum.photos/200/300'
-      ],
-    ),
-    Event(
-      id: '2',
-      title: 'jays basment',
-      user: 'random uuid 3210',
-      description:
-          "Vancouver's most popular K-pop night-club is back and better than before! Celebrate our 4th anniversary with us this Sunday, get your earlybird tickets today!",
-      tags: ['Drinks', 'Music', 'Party', 'Dance'],
-      numLikes: 179,
-      numShares: 17,
-      shareLink: 'facebook.com',
-      assets: [
-        'https://picsum.photos/200/300',
-        'https://picsum.photos/200/300',
-        'https://picsum.photos/200/300'
-      ],
-    ),
-  ]);
+Future<List<Event>> getEvents() async {
+  final http.Response events = await http.get(Uri.parse(
+      'http://10.0.2.2:3000/event/nearby-events?distance=2000&latitude=49.2265133&longitude=-123.1367469'));
+  debugPrint(events.body);
+
+  List<dynamic> resBody = jsonDecode(events.body);
+  return Future.value(resBody.map((event) => Event.fromJson(event)).toList());
 }
