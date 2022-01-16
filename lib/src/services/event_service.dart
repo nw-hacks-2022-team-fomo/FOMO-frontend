@@ -34,7 +34,6 @@ class Event {
       required this.assets});
 
   factory Event.fromJson(Map<String, dynamic> json) {
-
     List<dynamic> assetsList = json['assets'];
     List<dynamic> tagsList = json['tags'];
 
@@ -51,7 +50,8 @@ class Event {
         numShares: json['shares'],
         shareLink: json['share_link'],
         tags: tagsList.map((tag) => getAttribute("tag", tag)).toList(),
-        assets: assetsList.map((asset) => getAttribute("name", asset)).toList());
+        assets:
+            assetsList.map((asset) => getAttribute("name", asset)).toList());
   }
 }
 
@@ -66,6 +66,7 @@ Future<List<Event>> getEvents() async {
   final http.Response events = await http.get(Uri.parse(
       'http://10.0.2.2:3000/event/nearby-events?distance=2000&latitude=49.2265133&longitude=-123.1367469'));
   debugPrint(events.body);
+
   List<dynamic> resBody = jsonDecode(events.body);
   return Future.value(resBody.map((event) => Event.fromJson(event)).toList());
 }
