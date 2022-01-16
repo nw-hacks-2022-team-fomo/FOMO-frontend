@@ -1,6 +1,6 @@
 import 'package:app_frontend/src/widgets/account/Business/about.dart';
 import 'package:app_frontend/src/widgets/account/Business/events.dart';
-import 'package:app_frontend/src/widgets/account/Business/upcomming.dart';
+import 'package:app_frontend/src/widgets/account/Business/dashboard.dart';
 import 'package:flutter/material.dart';
 
 class Business extends StatefulWidget {
@@ -33,7 +33,7 @@ class _BusinessState extends State<Business> {
               tabs: [
                 Tab(text: "Events"),
                 Tab(text: "About"),
-                Tab(text: "Upcomming"),
+                Tab(text: "Dashboard"),
               ],
             ),
             Expanded(
@@ -49,7 +49,7 @@ class _BusinessState extends State<Business> {
                     ),
                     Padding(
                       padding: EdgeInsets.only(top: 14.0),
-                      child: Upcomming(),
+                      child: Dashboard(),
                     ),
                   ],
                 ))

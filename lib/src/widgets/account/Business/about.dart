@@ -29,10 +29,11 @@ class _AboutState extends State<About> {
             crossAxisAlignment: WrapCrossAlignment.start,
             direction: Axis.vertical,
             children: <Widget>[
-              const Text('Gender: '),
-              const Text('Account Type: '),
-              const Text('Email: '),
-              const Text('Phone: '),
+              const Text('Links', style: TextStyle(fontWeight: FontWeight.bold)),
+              const Text('Instagram: '),
+              const Text('Business Inquiries: '),
+              const Text('Youtube: '),
+              const Text('Tiktok: '),
             ],
           ),
         )
