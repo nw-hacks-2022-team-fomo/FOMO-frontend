@@ -23,6 +23,13 @@ class _MainAppState extends State<MainApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        textSelectionTheme: const TextSelectionThemeData(
+          cursorColor: Color(0xFFFFA800),
+          selectionColor: Color(0xFFFFA800),
+          selectionHandleColor: Color(0xFFFFA800),
+        ),
+      ),
       home: Scaffold(
         bottomNavigationBar: Padding(
           padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 24),

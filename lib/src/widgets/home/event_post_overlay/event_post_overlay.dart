@@ -31,7 +31,8 @@ class _EventPostOverlayState extends State<EventPostOverlay> {
   Widget build(BuildContext context) {
     return SlidingUpPanel(
         controller: controller,
-        backdropOpacity: 0,
+        backdropEnabled: true,
+        backdropOpacity: 0.0,
         minHeight: 162,
         boxShadow: const [],
         color: const Color.fromARGB(0, 0, 0, 0),

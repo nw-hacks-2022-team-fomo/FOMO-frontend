@@ -195,7 +195,7 @@ class Overlay extends StatelessWidget {
                                         alignment: Alignment.center,
                                         onPressed: onToggleExpanded,
                                         icon: Icon(
-                                          Icons.arrow_back,
+                                          Icons.keyboard_arrow_down_rounded,
                                           color: Colors.grey.shade400,
                                           size: 32,
                                         )),
@@ -226,7 +226,7 @@ class Overlay extends StatelessWidget {
                                             size: 32,
                                           )),
                                       Text(
-                                        'Back',
+                                        '#Likes',
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           color: Colors.grey.shade400,
@@ -254,7 +254,7 @@ class Overlay extends StatelessWidget {
                                             size: 32,
                                           )),
                                       Text(
-                                        'Back',
+                                        '#Shares',
                                         textAlign: TextAlign.center,
                                         style: TextStyle(
                                           color: Colors.grey.shade400,

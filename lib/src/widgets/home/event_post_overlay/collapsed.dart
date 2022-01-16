@@ -109,13 +109,24 @@ class Overlay extends StatelessWidget {
                     ),
                   ],
                 ),
-                IconButton(
-                    onPressed: onToggleExpanded,
-                    icon: const Icon(
-                      Icons.info_outline,
-                      color: Colors.white,
-                      size: 32,
-                    ))
+                Stack(children: [
+                  Positioned.fill(
+                    child: Container(
+                      margin: const EdgeInsets.all(14),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(100),
+                        color: const Color(0xFFFFC34E),
+                      ),
+                    ),
+                  ),
+                  IconButton(
+                      onPressed: onToggleExpanded,
+                      icon: const Icon(
+                        Icons.info_rounded,
+                        color: Colors.white,
+                        size: 32,
+                      )),
+                ])
               ],
             ),
             Flexible(
