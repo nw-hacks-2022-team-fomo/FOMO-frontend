@@ -100,6 +100,7 @@ class _SearchState extends State<Search> {
             selectedValue: selectedDate,
           ),
           GestureDetector(
+            // TODO: ADD SERVICE HANDLER FOR SEARCH SUBMISSION
             onTap: () {},
             child: Container(
                 alignment: Alignment.center,
