@@ -1,10 +1,12 @@
+import 'package:app_frontend/src/services/event_service.dart' as event_service;
 import 'package:app_frontend/src/widgets/account/Business/about.dart';
 import 'package:app_frontend/src/widgets/account/Business/events.dart';
 import 'package:app_frontend/src/widgets/account/Business/dashboard.dart';
 import 'package:flutter/material.dart';
 
 class Business extends StatefulWidget {
-  const Business({Key? key}) : super(key: key);
+  final List<event_service.Event> events;
+  const Business({Key? key, required this.events}) : super(key: key);
 
   @override
   State<Business> createState() => _BusinessState();
@@ -23,9 +25,10 @@ class _BusinessState extends State<Business> {
       child: DefaultTabController(
         length: 3,
         child: Column(
-          children: const <Widget>[
-            TabBar(
+          children: <Widget>[
+            const TabBar(
               indicatorColor: Color(0xFFFFA800),
+              labelColor: Color(0xFF000000),
               labelStyle: TextStyle(fontWeight: FontWeight.bold),
               unselectedLabelStyle:
               TextStyle(fontWeight: FontWeight.normal),
@@ -40,14 +43,14 @@ class _BusinessState extends State<Business> {
                 child: TabBarView(
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(top: 14.0),
-                      child: Events(),
+                      padding: const EdgeInsets.only(top: 14.0),
+                      child: Events(events: widget.events,),
                     ),
-                    Padding(
+                    const Padding(
                       padding: EdgeInsets.only(top: 14.0),
                       child: About(),
                     ),
-                    Padding(
+                    const Padding(
                       padding: EdgeInsets.only(top: 14.0),
                       child: Dashboard(),
                     ),
